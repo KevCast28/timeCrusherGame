@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -56,5 +57,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (rb.velocity.x > 0)
+        {
+            sr.flipX = false;
+        }
+        else if (rb.velocity.x < 0)
+        {
+            sr.flipX = true;
+        }
+
+        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        //anim.SetBool("isGrounded", isGrounded);
+
     }
 }
