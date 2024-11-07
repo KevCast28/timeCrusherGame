@@ -14,6 +14,8 @@ public class Hurtbox : MonoBehaviour
             other.transform.parent.gameObject.SetActive(false);
             PlayerController.instance.Bounce();
             Instantiate(deathEffect, other.transform.position, other.transform.rotation);
+
+            AudioManager.instance.PlaySFX(3);
         }
     }
 }
