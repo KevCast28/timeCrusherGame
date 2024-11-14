@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class UIController : MonoBehaviour
     public Image heart1, heart2, heart3;
 
     public Sprite fullHeart, emptyHeart, halfHeart;
+    public Text clockText;
+    public Image fadeScreen;
+    public float fadeSpeed;
+    private bool shouldFadeToBlack, shouldFadeFromBlack;
+    public GameObject levelCompleteText;
 
     private void Awake()
     {
@@ -19,13 +25,32 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        UpdateClockCount();
+        FadeFromBlack();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (shouldFadeToBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
 
+            if (fadeScreen.color.a == 1f)
+            {
+                shouldFadeToBlack = false;
+            }
+        }
+
+        if (shouldFadeFromBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+
+            if (fadeScreen.color.a == 0f)
+            {
+                shouldFadeFromBlack = false;
+            }
+        }
     }
 
     public void UpdateHealthDisplay()
@@ -68,5 +93,22 @@ public class UIController : MonoBehaviour
                 heart3.sprite = emptyHeart;
                 break;
         }
+    }
+
+    public void UpdateClockCount()
+    {
+        clockText.text = LevelManager.instance.clocksCollected.ToString();
+    }
+
+    public void FadeToBlack()
+    {
+        shouldFadeToBlack = true;
+        shouldFadeFromBlack = false;
+    }
+
+    public void FadeFromBlack()
+    {
+        shouldFadeToBlack = false;
+        shouldFadeFromBlack = true;
     }
 }

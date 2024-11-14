@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [Header("Animations")]
     private Animator anim;
     private SpriteRenderer sr;
+    public bool stopInput;
 
     private void Awake()
     {
@@ -42,11 +43,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PauseMenu.instance.isPaused)
+        if (!PauseMenu.instance.isPaused && !stopInput)
         {
             if (knockBackCounter <= 0)
             {
-                rb.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), rb.velocity.y);
+                rb.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rb.velocity.y);
 
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, whatIsGround);
 
