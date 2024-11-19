@@ -6,7 +6,7 @@ using UnityEngine;
 public class Hurtbox : MonoBehaviour
 {
     public GameObject deathEffect;
-    [Range(0, 100)] public float chancheToDrop;
+    [Range(0, 100)] public float chanceToDrop;
     public GameObject collectible;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,7 +20,7 @@ public class Hurtbox : MonoBehaviour
 
             AudioManager.instance.PlaySFX(3);
 
-            if (dropSelect <= chancheToDrop)
+            if (dropSelect <= chanceToDrop)
             {
                 Instantiate(collectible, other.transform.position, other.transform.rotation);
             }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5412825155924731594}
   - component: {fileID: 2290446529157927760}
   - component: {fileID: 1830423723084253757}
+  - component: {fileID: -2178724881890274343}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -158,3 +159,16 @@ MonoBehaviour:
   isClock: 1
   isHeal: 0
   pickupEffect: {fileID: 4875808876923737479, guid: 801a4b2be28311e4581494599411ad5d, type: 3}
+--- !u!114 &-2178724881890274343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079664509245737527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63db660f9bcff9544b0909ca16abb721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsToAdd: 100
