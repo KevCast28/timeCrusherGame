@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907a405cfa7882b4a96ca2efd00a3950, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  dialogue:
+  - "This is my dialogue!\nHello.\t"
+  - 'This is our second dialogue.
+
+    Goodbye!'
