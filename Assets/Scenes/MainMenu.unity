@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5285938ab9de564aaebd9eeac6b9f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: Test
+  startScene: Intro
 --- !u!114 &796392988
 MonoBehaviour:
   m_ObjectHideFlags: 0

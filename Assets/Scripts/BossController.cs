@@ -5,7 +5,7 @@ using UnityEngine.Android;
 
 public class BossController : MonoBehaviour
 {
-    public enum bossStates { shooting, hurt, moving }
+    public enum bossStates { shooting, hurt, moving, ended };
     public bossStates currentStates;
     public Transform boss;
     public Animator anim;
@@ -23,6 +23,14 @@ public class BossController : MonoBehaviour
     [Header("Hurt")]
     public float hurtTime;
     private float hurtCounter;
+
+    public GameObject hitbox;
+
+    [Header("Health")]
+    public int health = 5;
+    public GameObject explosion, winPlatform;
+    private bool isDefeated;
+    public float shotSpeedUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +50,7 @@ public class BossController : MonoBehaviour
                     shotCounter = timeBetweenShots;
                     var newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
                     newBullet.transform.localScale = boss.localScale;
+                    AudioManager.instance.PlaySFX(2);
                 }
                 break;
             case bossStates.hurt:
@@ -52,6 +61,19 @@ public class BossController : MonoBehaviour
                     if (hurtCounter <= 0)
                     {
                         currentStates = bossStates.moving;
+
+                        if (isDefeated)
+                        {
+                            boss.gameObject.SetActive(false);
+                            Instantiate(explosion, transform.position, transform.rotation);
+
+                            winPlatform.SetActive(true);
+
+                            currentStates = bossStates.ended;
+
+                            AudioManager.instance.StopBossMusic();
+
+                        }
                     }
                 }
                 break;
@@ -94,6 +116,18 @@ public class BossController : MonoBehaviour
         hurtCounter = hurtTime;
 
         anim.SetTrigger("Hit");
+
+        health--;
+
+        if (health <= 0)
+        {
+            isDefeated = true;
+        }
+        else
+        {
+            timeBetweenShots /= shotSpeedUp;
+            //shotCounter = timeBetweenShots;
+        }
     }
 
     private void EndMovement()
@@ -102,5 +136,7 @@ public class BossController : MonoBehaviour
         shotCounter = timeBetweenShots;
 
         anim.SetTrigger("StopMoving");
+
+        hitbox.SetActive(true);
     }
 }

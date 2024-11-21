@@ -17,6 +17,7 @@ public class Pickup : MonoBehaviour
                 UIController.instance.UpdateClockCount();
                 Instantiate(pickupEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
+                AudioManager.instance.PlaySFX(6);
             }
 
             if (isHeal)
